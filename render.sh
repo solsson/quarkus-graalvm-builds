@@ -17,6 +17,7 @@ for EXAMPLE in $EXAMPLES; do
     | grep "$(which native-image)" \
     | cut -d\  -f4- \
     | sed "s/$EXAMPLE-1.0-SNAPSHOT/__APP__/g" \
+    | sed "s/ --dry-run//" \
     > ../../$EXAMPLE.txt
 done
 
