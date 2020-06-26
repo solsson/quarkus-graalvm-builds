@@ -12,7 +12,12 @@ cd quarkus-quickstarts
 for EXAMPLE in $EXAMPLES; do
   cd $EXAMPLE
   mvn package -Pnative -Dquarkus.native.additional-build-args=--dry-run > build.log || echo "Failure was expected"
-  cat build.log | grep 'io.quarkus.deployment.pkg.steps.NativeImageBuildStep' | grep "$(which native-image)" | cut -d\  -f4- | sed "s/$EXAMPLE/__APP__/g" > ../../$EXAMPLE.txt
+  cat build.log \
+    | grep 'io.quarkus.deployment.pkg.steps.NativeImageBuildStep' \
+    | grep "$(which native-image)" \
+    | cut -d\  -f4- \
+    | sed "s/$EXAMPLE-1.0-SNAPSHOT/__APP__/g" \
+    > ../../$EXAMPLE.txt
 done
 
 cd ..
